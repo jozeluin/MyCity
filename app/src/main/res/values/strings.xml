@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">MyCity</string>
+    <!--Recommendations Category-->
+    <string name="cafeterias">Cafeterias</string>
+    <string name="bibliotecas">Bibliotecas</string>
+    <string name="restaurantes">Restaurantes</string>
+    <string name="sitios_de_interes">Sitios de interes</string>
+    <string name="cervecerias">Cervecerias</string>
+
+    <!--    Nombre de Local-->
+
+    <string name="cafeteria_liquitos">Cafeteria Iquitos</string>
+    <string name="cafeteria_la_crep">Cafeteria La Crep</string>
+
+    <string name="biblioteca_can_peixauet">Biblioteca Can Peixauet</string>
+    <string name="biblioteca_central">Biblioteca Central</string>
+    <string name="biblioteca_fondo">Biblioteca Fondo</string>
+    <string name="biblioteca_singuerlin">Biblioteca Singuerlin</string>
+
+    <string name="cerveceria_bar_castilla">Cerveceria Bar Castilla</string>
+    <string name="cerveceria_la_fabrica">Cerveceria La Fabrica</string>
+    <string name="cerveceria_isalba">Cerveceria Isalba</string>
+
+    <string name="sitio_interes_ayuntamiento">Ayuntamiento</string>
+    <string name="sitio_interes_parque_rio">Parque Fluvial del Besos</string>
+    <string name="sitio_interes_parque_rio_atardecer">Parque Fluvial del Besos Atardecer</string>
+    <string name="sitio_interes_puig_Castellar">Poblado Iberico</string>
+    <string name="sitio_interes_puente_noche">Puente de la dona</string>
+
+    <string name="restaurante_don_Martin">Restaurane Don Martin</string>
+    <string name="restaurante_l_obra">Restaurante L´Obra</string>
+    <string name="restaurante_santa_lola">Restaurante Santa Lola</string>
+
+
+
+
+
+    <!--    Comentarios de cafeterias-->
+    <string name="Comentario_Cafeteria">Esta cafeteria es muy buena y ponen un
+    cafe y un chocolate buenisimo, y son limpios</string>
+
+    <!--    Comentarios de Bibliotecas-->
+    <string name="Comentario_Bibliotecas">Esta Bibliotecas esta muy bien es silenciosa
+    y tiene muy buenos textos</string>
+
+    <!--    Comentarios de restuarants-->
+    <string name="Comentario_Restaurantes">Estos restaurantes estan muy bien centricos
+    economicos, vamos un chollete</string>
+
+    <!--    Comentarios de sitios interes-->
+    <string name="Comentario_sitios_interes">Ke puedo decir de estos sitios de interes
+    pues que son muy interesantes</string>
+
+    <!--    Comentarios de cervecerias-->
+    <string name="Comentario_cerveceria">Esta la cerveza muy fresquita y muy guena y habeces
+    te  ponen altramuces para picar...que suerte</string>
+
+
+
+</resources>
