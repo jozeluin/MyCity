@@ -35,7 +35,7 @@ fun ListCategoryScreen(
 
 
 }
-
+//esto es una prueba
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlaceListItem(
