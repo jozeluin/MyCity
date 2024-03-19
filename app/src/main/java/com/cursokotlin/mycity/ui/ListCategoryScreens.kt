@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.sp
 import com.cursokotlin.mycity.R
 import com.cursokotlin.mycity.data.LocalPlaceProvider
 import com.cursokotlin.mycity.model.Place
-import com.cursokotlin.mycity.model.TypePlace
+import com.cursokotlin.mycity.model.TypePlaceScreen
 
 @Composable
 fun ListCategoryScreen(
@@ -35,7 +35,14 @@ fun ListCategoryScreen(
 
 
 }
-//esto es una prueba
+
+/**
+ * Es el item de la lista de categorias
+ *
+ * @param place
+ * @param onItemClick
+ * @param modifier
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlaceListItem(
@@ -87,39 +94,47 @@ fun PlaceListItemPreview() {
 
 }
 
+/**
+ * Dado un lugar, revisa que tipo es y devuelve la imagen que
+ * corresponde y el titulo, para la pantalla de lista de  las categorias
+ *
+ * @param place
+ * @return
+ */
 @Composable
 fun TypeItem(place: Place): Pair<Int, Int> {
     // val miPair = Pair(primero = "Carlos", segundo = 34)
     var imagen: Int = 0
     var titulo: Int = 0
 
-    when (place.typePlace) {
-        TypePlace.Cafeteria -> {
+    when (place.typePlaceScreen) {
+        TypePlaceScreen.Cafeteria -> {
             imagen = R.drawable.cafeteria
             titulo = R.string.cafeterias
 
         }
 
-        TypePlace.Biblioteca -> {
+        TypePlaceScreen.Biblioteca -> {
             imagen = R.drawable.biblioteca
             titulo = R.string.bibliotecas
         }
 
-        TypePlace.Restaurante -> {
+        TypePlaceScreen.Restaurante -> {
             imagen = R.drawable.restaurante
             titulo = R.string.restaurantes
         }
 
-        TypePlace.SitioInteres -> {
+        TypePlaceScreen.SitioInteres -> {
             imagen = R.drawable.punto_de_interes
             titulo = R.string.sitios_de_interes
         }
 
-        TypePlace.Cervecerias -> {
+        TypePlaceScreen.Cerveceria -> {
             imagen = R.drawable.cerveza
             titulo = R.string.cervecerias
         }
 
+        else -> {}
     }
     var mipar = Pair(imagen, titulo)
     return mipar
