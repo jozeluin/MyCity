@@ -12,6 +12,11 @@ data class Place(
     val typePlaceScreen: TypePlaceScreen
 
 )
+data class Category(
+    val id: Int,
+    val typePlaceScreen: TypePlaceScreen,
+    @DrawableRes val imageResoureId: Int
+)
 
 enum class TypePlaceScreen(@StringRes val title:Int){
     Cafeteria(title = R.string.cafeterias),
@@ -19,4 +24,8 @@ enum class TypePlaceScreen(@StringRes val title:Int){
     Restaurante(title = R.string.restaurantes),
     SitioInteres(title = R.string.sitios_de_interes),
     Cerveceria(title = R.string.cervecerias)
+}
+
+enum class Screens(){
+    LISTA_CATEGORIAS,LISTA_RECOMENDACIONES,DETALLES
 }

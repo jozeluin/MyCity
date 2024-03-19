@@ -1,5 +1,7 @@
 package com.cursokotlin.mycity.ui
 
+import android.provider.Settings.Global.getString
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -15,11 +17,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.cursokotlin.mycity.R
+import com.cursokotlin.mycity.model.Screens
 import com.cursokotlin.mycity.model.TypePlaceScreen
 import com.cursokotlin.mycity.ui.utils.CityContentType
 
@@ -77,14 +83,36 @@ fun CityApp(
             startDestination = TypePlaceScreen.Cafeteria.name,
             modifier = Modifier.padding(innerPadding)
         ){
+            if(contentType!= CityContentType.LIST_AND_DETAIL) {
+                composable(route = Screens.LISTA_CATEGORIAS.name) {
 
+                }
+                composable(route = Screens.LISTA_RECOMENDACIONES.name) {
 
+                }
+                composable(route = Screens.DETALLES.name) {
 
+                }
+
+            }
+
+            else{
+
+            }
 
         }
     }
 
-
+   /* composable(route = LunchTrayScreen.Start.name) {
+        StartOrderScreen(
+            onStartOrderButtonClicked = {
+                navController.navigate(LunchTrayScreen.Entree.name)
+            },
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+        )
+    }*/
 
 
 

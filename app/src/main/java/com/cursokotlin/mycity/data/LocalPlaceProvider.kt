@@ -1,6 +1,7 @@
 package com.cursokotlin.mycity.data
 
 import com.cursokotlin.mycity.R
+import com.cursokotlin.mycity.model.Category
 import com.cursokotlin.mycity.model.Place
 import com.cursokotlin.mycity.model.TypePlaceScreen
 
@@ -8,6 +9,38 @@ object LocalPlaceProvider {
 
     val defaultPlace= getPlaceData()[0]
 
+fun getCategory():List<Category>{
+
+    return listOf(
+        Category(
+            id=1,
+            typePlaceScreen = TypePlaceScreen.Cafeteria,
+            imageResoureId = R.drawable.cafeteria
+        ),
+        Category(
+            id=2,
+            typePlaceScreen = TypePlaceScreen.Cerveceria,
+            imageResoureId = R.drawable.cerveza
+        ),
+        Category(
+            id=3,
+            typePlaceScreen = TypePlaceScreen.Restaurante,
+            imageResoureId = R.drawable.restaurante
+        ),
+        Category(
+            id=4,
+            typePlaceScreen = TypePlaceScreen.Biblioteca,
+            imageResoureId = R.drawable.biblioteca
+        ),
+        Category(
+            id=5,
+            typePlaceScreen = TypePlaceScreen.SitioInteres,
+            imageResoureId = R.drawable.punto_de_interes
+        ),
+
+    )
+
+}
 
     fun getPlaceData(): List<Place> {
         return listOf(
