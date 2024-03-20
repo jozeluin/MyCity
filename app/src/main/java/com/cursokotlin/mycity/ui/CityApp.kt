@@ -1,7 +1,6 @@
 package com.cursokotlin.mycity.ui
 
-import android.provider.Settings.Global.getString
-import androidx.compose.foundation.layout.fillMaxSize
+import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -17,14 +16,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.cursokotlin.mycity.R
 import com.cursokotlin.mycity.model.Screens
 import com.cursokotlin.mycity.model.TypePlaceScreen
 import com.cursokotlin.mycity.ui.utils.CityContentType
@@ -72,19 +70,25 @@ fun CityApp(
         topBar = {
             CityAppBar(
                 typePlaceScreen = curresntScreen,
-                canNavigateBack = navController.previousBackStackEntry!=null,
+                canNavigateBack = navController.previousBackStackEntry != null,
                 navigateup = { navController.navigateUp() })
 
         }
-    ) { innerPadding->
+    ) { innerPadding ->
 
         NavHost(
             navController = navController,
             startDestination = TypePlaceScreen.Cafeteria.name,
             modifier = Modifier.padding(innerPadding)
-        ){
-            if(contentType!= CityContentType.LIST_AND_DETAIL) {
-                composable(route = Screens.LISTA_CATEGORIAS.name) {
+        ) {
+            if (contentType != CityContentType.LIST_AND_DETAIL) {
+                Log.i("MiCategoria", "He pasado")
+                composable(route = TypePlaceScreen.Cafeteria.name) {
+                    ListCategoryScreen(
+                        category = uiState.categoryList,
+                        onClik = {},
+                        modifier = Modifier
+                    )
 
                 }
                 composable(route = Screens.LISTA_RECOMENDACIONES.name) {
@@ -94,30 +98,23 @@ fun CityApp(
 
                 }
 
-            }
-
-            else{
+            } else {
 
             }
 
         }
     }
 
-   /* composable(route = LunchTrayScreen.Start.name) {
-        StartOrderScreen(
-            onStartOrderButtonClicked = {
-                navController.navigate(LunchTrayScreen.Entree.name)
-            },
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-        )
-    }*/
-
-
-
-
-
+    /* composable(route = LunchTrayScreen.Start.name) {
+         StartOrderScreen(
+             onStartOrderButtonClicked = {
+                 navController.navigate(LunchTrayScreen.Entree.name)
+             },
+             modifier = Modifier
+                 .fillMaxSize()
+                 .padding(innerPadding)
+         )
+     }*/
 
 
 }
@@ -133,10 +130,11 @@ fun CityAppBar(
 
 ) {
     TopAppBar(
+
         title = { Text(stringResource(typePlaceScreen.title)) },
         modifier = modifier,
-        navigationIcon ={
-            if(canNavigateBack){
+        navigationIcon = {
+            if (canNavigateBack) {
                 IconButton(onClick = navigateup) {
                     Icon(
                         imageVector = Icons.Filled.ArrowBack,
@@ -149,6 +147,25 @@ fun CityAppBar(
         }
     )
 
+}
+
+@Preview()
+@Composable
+fun cityAppbarpreview() {
+    val tipodecategoria = TypePlaceScreen.Cafeteria
+    CityAppBar(
+        typePlaceScreen = tipodecategoria,
+        canNavigateBack = true,
+        navigateup = { })
+
+}
+
+@Preview()
+@Composable
+fun citypreview() {
+    val navController: NavHostController = rememberNavController()
+
+    CityApp(windowSize = WindowWidthSizeClass.Compact, navController = navController)
 }
 
 

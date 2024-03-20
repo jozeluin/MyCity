@@ -17,9 +17,11 @@ class CityViewModel:ViewModel() {
 
     private fun initializeUiState() {
         val listPlace=LocalPlaceProvider.getPlaceData()
+        val listCategory=LocalPlaceProvider.getCategory()
         _uiState.value=
             CityUiState(
                 placeList = listPlace,
+                categoryList  =listCategory,
                 currentPlace = listPlace[0]
             )
     }
