@@ -1,4 +1,4 @@
-package com.cursokotlin.mycity.ui
+package com.cursokotlin.mycity
 
 import android.util.Log
 import androidx.compose.foundation.layout.padding
@@ -25,6 +25,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.cursokotlin.mycity.model.Screens
 import com.cursokotlin.mycity.model.TypePlaceScreen
+import com.cursokotlin.mycity.ui.CityViewModel
+import com.cursokotlin.mycity.ui.ListCategoryScreen
 import com.cursokotlin.mycity.ui.utils.CityContentType
 
 

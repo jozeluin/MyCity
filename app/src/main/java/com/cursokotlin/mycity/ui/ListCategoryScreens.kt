@@ -45,8 +45,8 @@ fun ListCategoryScreen(
     ) {
       items(category,key={categoria ->categoria.id}) { currentcategoria->
           CategoryItem(
-              category=currentcategoria,
-              onItemClick=onClik
+              category =currentcategoria,
+              onItemClick = { onClik(currentcategoria) }
           )
       }
     }
@@ -57,7 +57,7 @@ fun ListCategoryScreen(
 @Composable
 fun CategoryItem(
     category: Category,
-    onItemClick: (Category) -> Unit,
+    onItemClick:()-> Unit,
     modifier: Modifier=Modifier
 
 )
@@ -70,7 +70,7 @@ fun CategoryItem(
         modifier=modifier.wrapContentSize(),
         border = BorderStroke(width = 2.dp, Color.Black),
         shape = RoundedCornerShape(20.dp),
-        onClick = { onItemClick(category) }
+        onClick = onItemClick
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -98,10 +98,6 @@ fun CategoryItem(
 
 
 
-
-
-
-
 }
 
 @Composable
@@ -123,49 +119,7 @@ fun ListCategoryScreenPreview(){
  * @param onItemClick
  * @param modifier
  */
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun PlaceListItem(
-    place: Place,
-    onItemClick: (Place) -> Unit,
-    modifier: Modifier=Modifier
-) {
-    Card(
-        elevation = CardDefaults.cardElevation(),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.DarkGray, //Card background color
-            contentColor = Color.White),  //Card content color,e.g.text
-        modifier=modifier.wrapContentSize(),
-        border = BorderStroke(width = 2.dp, Color.Black),
-        shape = RoundedCornerShape(20.dp),
-        onClick = { onItemClick(place) }
-    ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceAround,
-            modifier = modifier
-                .fillMaxWidth()
 
-        )
-        {
-            Image(
-                painter = painterResource(id = TypeItem(place = place).first),
-                contentDescription = "",
-                modifier = modifier.height(100.dp)
-            )
-            Text(
-                text = stringResource(id = TypeItem(place = place).second),
-                fontSize = 30.sp
-
-
-                )
-        }
-
-
-    }
-
-
-}
 
 
 /**
