@@ -8,8 +8,11 @@ import com.cursokotlin.mycity.model.TypePlaceScreen
 object LocalPlaceProvider {
 
     val defaultPlace= getPlaceData()[0]
+    val defaulCategory= getCategory()[0]
 
 fun getCategory():List<Category>{
+
+
 
     return listOf(
         Category(

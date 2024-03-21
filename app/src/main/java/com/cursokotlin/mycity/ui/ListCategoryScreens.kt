@@ -46,7 +46,7 @@ fun ListCategoryScreen(
       items(category,key={categoria ->categoria.id}) { currentcategoria->
           CategoryItem(
               category =currentcategoria,
-              onItemClick = { onClik(currentcategoria) }
+              onItemClick =onClik
           )
       }
     }
@@ -57,7 +57,7 @@ fun ListCategoryScreen(
 @Composable
 fun CategoryItem(
     category: Category,
-    onItemClick:()-> Unit,
+    onItemClick:(Category)-> Unit,
     modifier: Modifier=Modifier
 
 )
@@ -70,7 +70,7 @@ fun CategoryItem(
         modifier=modifier.wrapContentSize(),
         border = BorderStroke(width = 2.dp, Color.Black),
         shape = RoundedCornerShape(20.dp),
-        onClick = onItemClick
+        onClick = {onItemClick(category)}
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,

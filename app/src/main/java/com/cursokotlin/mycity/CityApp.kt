@@ -88,7 +88,7 @@ fun CityApp(
                 composable(route = TypePlaceScreen.Cafeteria.name) {
                     ListCategoryScreen(
                         category = uiState.categoryList,
-                        onClik = {},
+                        onClik = {viewModel.updateCurrentCategory(it)},
                         modifier = Modifier
                     )
 
