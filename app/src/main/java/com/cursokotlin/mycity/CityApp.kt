@@ -1,9 +1,13 @@
 package com.cursokotlin.mycity
 
+import android.text.Layout
 import android.util.Log
+
+
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -14,8 +18,10 @@ import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -27,6 +33,8 @@ import com.cursokotlin.mycity.model.Screens
 import com.cursokotlin.mycity.model.TypePlaceScreen
 import com.cursokotlin.mycity.ui.CityViewModel
 import com.cursokotlin.mycity.ui.ListCategoryScreen
+import com.cursokotlin.mycity.ui.RecommendationList
+import com.cursokotlin.mycity.ui.previewListItem
 import com.cursokotlin.mycity.ui.utils.CityContentType
 
 
@@ -39,13 +47,15 @@ fun CityApp(
 ) {
 
     val backStackEntry by navController.currentBackStackEntryAsState()
-    val curresntScreen = TypePlaceScreen.valueOf(
-        backStackEntry?.destination?.route ?: TypePlaceScreen.Cafeteria.name
+    val curresntScreen = Screens.valueOf(
+        backStackEntry?.destination?.route ?: Screens.LISTA_CATEGORIAS.name
     )
 
     val viewModel: CityViewModel = viewModel()
     val uiState by viewModel.uiState.collectAsState()
     val contentType: CityContentType
+
+
 
 
     when (windowSize) {
@@ -71,7 +81,7 @@ fun CityApp(
     Scaffold(
         topBar = {
             CityAppBar(
-                typePlaceScreen = curresntScreen,
+                screens = curresntScreen,
                 canNavigateBack = navController.previousBackStackEntry != null,
                 navigateup = { navController.navigateUp() })
 
@@ -80,21 +90,26 @@ fun CityApp(
 
         NavHost(
             navController = navController,
-            startDestination = TypePlaceScreen.Cafeteria.name,
+            startDestination = Screens.LISTA_CATEGORIAS.name,
             modifier = Modifier.padding(innerPadding)
         ) {
             if (contentType != CityContentType.LIST_AND_DETAIL) {
                 Log.i("MiCategoria", "He pasado")
-                composable(route = TypePlaceScreen.Cafeteria.name) {
+
+                composable(route = Screens.LISTA_CATEGORIAS.name) {
                     ListCategoryScreen(
                         category = uiState.categoryList,
-                        onClik = {viewModel.updateCurrentCategory(it)},
+                        onClik = {
+                           viewModel.updateCurrentCategory(it)
+                            navController.navigate(Screens.LISTA_RECOMENDACIONES.name)
+                                 },
                         modifier = Modifier
                     )
 
                 }
                 composable(route = Screens.LISTA_RECOMENDACIONES.name) {
-
+                    //previewListItem()
+                    RecommendationList(place =viewModel.listOfItemsbycategory, onClik = {})
                 }
                 composable(route = Screens.DETALLES.name) {
 
@@ -125,15 +140,15 @@ fun CityApp(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CityAppBar(
-    typePlaceScreen: TypePlaceScreen,
+    screens: Screens,
     canNavigateBack: Boolean,
     navigateup: () -> Unit,
     modifier: Modifier = Modifier
 
 ) {
-    TopAppBar(
+    CenterAlignedTopAppBar(
 
-        title = { Text(stringResource(typePlaceScreen.title)) },
+        title = { Text(stringResource(screens.title),textAlign= TextAlign.End) },
         modifier = modifier,
         navigationIcon = {
             if (canNavigateBack) {
@@ -154,15 +169,15 @@ fun CityAppBar(
 @Preview()
 @Composable
 fun cityAppbarpreview() {
-    val tipodecategoria = TypePlaceScreen.Cafeteria
+    val tipodecategoria = Screens.LISTA_CATEGORIAS
     CityAppBar(
-        typePlaceScreen = tipodecategoria,
+        screens = tipodecategoria,
         canNavigateBack = true,
         navigateup = { })
 
 }
 
-@Preview()
+//@Preview()
 @Composable
 fun citypreview() {
     val navController: NavHostController = rememberNavController()

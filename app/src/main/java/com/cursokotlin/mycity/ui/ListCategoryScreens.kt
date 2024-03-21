@@ -3,6 +3,7 @@ package com.cursokotlin.mycity.ui
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -46,7 +47,7 @@ fun ListCategoryScreen(
       items(category,key={categoria ->categoria.id}) { currentcategoria->
           CategoryItem(
               category =currentcategoria,
-              onItemClick =onClik
+              onItemClick ={onClik(currentcategoria)}
           )
       }
     }
@@ -80,11 +81,15 @@ fun CategoryItem(
 
         )
         {
-            Image(
-                painter = painterResource(id = category.imageResoureId),
-                contentDescription = "",
-                modifier = modifier.height(100.dp)
-            )
+
+            Box(){
+                Image(
+                    painter = painterResource(id = category.imageResoureId),
+                    contentDescription = "",
+                    modifier = modifier.height(100.dp)
+                )
+            }
+
             Text(
                 text = stringResource(id =category.typePlaceScreen.title),
                 fontSize = 30.sp

@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">MyCity</string>
+    <string name="ListCategory">Lista de Categorias</string>
+    <string name="RecomendationList">Lista de Recomendaciones</string>
+    <string name="DetailPlace">Detalle del lugar</string>
+
+
+
     <!--Recommendations Category-->
     <string name="cafeterias">Cafeterias</string>
     <string name="bibliotecas">Bibliotecas</string>

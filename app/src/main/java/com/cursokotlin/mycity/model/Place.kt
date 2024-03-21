@@ -2,6 +2,7 @@ package com.cursokotlin.mycity.model
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.compose.runtime.Composable
 import com.cursokotlin.mycity.R
 
 data class Place(
@@ -26,6 +27,14 @@ enum class TypePlaceScreen(@StringRes val title:Int){
     Cerveceria(title = R.string.cervecerias)
 }
 
-enum class Screens(){
-    LISTA_CATEGORIAS,LISTA_RECOMENDACIONES,DETALLES
+enum class Screens(@StringRes val title:Int){
+    LISTA_CATEGORIAS(title = R.string.ListCategory),
+    LISTA_RECOMENDACIONES(title = R.string.RecomendationList),
+    DETALLES(title = R.string.DetailPlace)
+}
+
+@Composable
+fun devuelveLista():List<String>{
+    val listapantallas= listOf("categorias","recomendaciones","listas")
+    return  listapantallas
 }

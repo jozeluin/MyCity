@@ -3,10 +3,12 @@ package com.cursokotlin.mycity.ui
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -19,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -39,8 +42,9 @@ fun RecomemdationsListItem(
         elevation = CardDefaults.cardElevation(),
         colors = CardDefaults.cardColors(
             containerColor = Color.DarkGray, //Card background color
-            contentColor = Color.White),  //Card content color,e.g.text
-        modifier=modifier.wrapContentSize(),
+            contentColor = Color.White
+        ),  //Card content color,e.g.text
+        modifier = modifier.wrapContentSize(),
         border = BorderStroke(width = 2.dp, Color.Black),
         shape = RoundedCornerShape(20.dp),
         onClick = onItemClick
@@ -53,17 +57,29 @@ fun RecomemdationsListItem(
 
         )
         {
-            Image(
-                painter = painterResource(id = place.imageResoureId),
-                contentDescription = "",
-                modifier = modifier.height(100.dp)
-            )
-            Text(
-                text = stringResource(id = place.titleResourceId),
-                fontSize = 30.sp
+            Box(
+                modifier = Modifier.width(100.dp)
+
+            ) {
+                Image(
+                    painter = painterResource(id = place.imageResoureId),
+                    contentDescription = "",
+                    modifier = modifier.height(100.dp),
+                    contentScale = ContentScale.Crop
+                )
+            }
+            Box(
+
+                modifier = Modifier.width(200.dp)
+            ) {
+                Text(
+                    text = stringResource(id = place.titleResourceId),
+                    fontSize = 25.sp
 
 
-            )
+                )
+            }
+
         }
 
 
@@ -71,21 +87,23 @@ fun RecomemdationsListItem(
 
 
 }
+
 @Preview(showSystemUi = true)
 @Composable
-fun previewListItem(){
-    ListRecomendationScren(
-        place=LocalPlaceProvider.getPlaceData(),
+fun previewListItem() {
+    RecommendationList(
+        place = LocalPlaceProvider.getPlaceData(),
         onClik = {},
-        contentPadding=PaddingValues(0.dp)
+        contentPadding = PaddingValues(0.dp)
 
     )
 }
+
 @Composable
-fun ListRecomendationScren(
+fun RecommendationList(
     place: List<Place>,
-    onClik:(Place)->Unit,
-    modifier: Modifier=Modifier,
+    onClik: (Place) -> Unit,
+    modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp)
 
 ) {
@@ -94,10 +112,10 @@ fun ListRecomendationScren(
         verticalArrangement = Arrangement.spacedBy(20.dp),
         modifier = modifier,
     ) {
-        items(place,key={place ->place.id}) { currentplace->
+        items(place, key = { place -> place.id }) { currentplace ->
             RecomemdationsListItem(
-                place=currentplace,
-                onItemClick= { onClik(currentplace) }
+                place = currentplace,
+                onItemClick = { onClik(currentplace) }
             )
         }
     }
