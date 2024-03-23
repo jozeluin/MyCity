@@ -1,9 +1,8 @@
 package com.cursokotlin.mycity
 
-import android.text.Layout
+
 import android.util.Log
-
-
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -11,18 +10,20 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -30,11 +31,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.cursokotlin.mycity.model.Screens
-import com.cursokotlin.mycity.model.TypePlaceScreen
 import com.cursokotlin.mycity.ui.CityViewModel
+import com.cursokotlin.mycity.ui.DetailPlace
 import com.cursokotlin.mycity.ui.ListCategoryScreen
 import com.cursokotlin.mycity.ui.RecommendationList
-import com.cursokotlin.mycity.ui.previewListItem
 import com.cursokotlin.mycity.ui.utils.CityContentType
 
 
@@ -43,7 +43,7 @@ import com.cursokotlin.mycity.ui.utils.CityContentType
 fun CityApp(
     windowSize: WindowWidthSizeClass,
     navController: NavHostController = rememberNavController(),
-    modifier: Modifier = Modifier
+    modifier: Modifier=Modifier
 ) {
 
     val backStackEntry by navController.currentBackStackEntryAsState()
@@ -79,6 +79,8 @@ fun CityApp(
 
 
     Scaffold(
+        containerColor = Color.Cyan,
+
         topBar = {
             CityAppBar(
                 screens = curresntScreen,
@@ -91,7 +93,7 @@ fun CityApp(
         NavHost(
             navController = navController,
             startDestination = Screens.LISTA_CATEGORIAS.name,
-            modifier = Modifier.padding(innerPadding)
+            modifier = modifier.padding(innerPadding).padding(top=10.dp)
         ) {
             if (contentType != CityContentType.LIST_AND_DETAIL) {
                 Log.i("MiCategoria", "He pasado")
@@ -100,18 +102,31 @@ fun CityApp(
                     ListCategoryScreen(
                         category = uiState.categoryList,
                         onClik = {
-                           viewModel.updateCurrentCategory(it)
+                            viewModel.updateCurrentCategory(it)
                             navController.navigate(Screens.LISTA_RECOMENDACIONES.name)
-                                 },
+                        },
                         modifier = Modifier
                     )
 
                 }
                 composable(route = Screens.LISTA_RECOMENDACIONES.name) {
                     //previewListItem()
-                    RecommendationList(place =viewModel.listOfItemsbycategory, onClik = {})
+                    RecommendationList(
+                        place = viewModel.listOfItemsbycategory,
+                        onClik = {
+                            viewModel.updateCurrentPlace(it)
+                            navController.navigate(Screens.DETALLES.name)
+
+                        }
+                    )
                 }
                 composable(route = Screens.DETALLES.name) {
+                    DetailPlace(
+                        selectedPlace = uiState.currentPlace,
+                        modifier = Modifier,
+                        contentPadding = PaddingValues()
+
+                    )
 
                 }
 
@@ -119,6 +134,7 @@ fun CityApp(
 
             }
 
+        }
         }
     }
 
@@ -134,7 +150,7 @@ fun CityApp(
      }*/
 
 
-}
+
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -148,10 +164,13 @@ fun CityAppBar(
 ) {
     CenterAlignedTopAppBar(
 
-        title = { Text(stringResource(screens.title),textAlign= TextAlign.End) },
+        title = { Text(stringResource(screens.title), textAlign = TextAlign.End) },
         modifier = modifier,
+        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primary ),
         navigationIcon = {
             if (canNavigateBack) {
+
                 IconButton(onClick = navigateup) {
                     Icon(
                         imageVector = Icons.Filled.ArrowBack,
@@ -182,7 +201,7 @@ fun cityAppbarpreview() {
 fun citypreview() {
     val navController: NavHostController = rememberNavController()
 
-    CityApp(windowSize = WindowWidthSizeClass.Compact, navController = navController)
+    CityApp(windowSize = WindowWidthSizeClass.Compact, navController = navController, modifier = Modifier)
 }
 
 

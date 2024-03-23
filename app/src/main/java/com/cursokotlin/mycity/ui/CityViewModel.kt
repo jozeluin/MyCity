@@ -54,6 +54,13 @@ class CityViewModel : ViewModel() {
         return listofItems
     }
 
+    fun updateCurrentPlace(place: Place) {
+        _uiState.update{
+            it.copy(currentPlace = place)
+        }
+
+    }
+
 
 }
 
