@@ -28,6 +28,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -110,6 +111,7 @@ private fun SportsListImageItem(sport: Sport, modifier: Modifier = Modifier) {
                 text = stringResource(selectedPlace.placeDetails),
                 style = MaterialTheme.typography.bodyLarge,
                 fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
                 fontStyle= FontStyle.Italic,
                 modifier = Modifier.padding(
                     vertical = 20.dp,
